@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Created By Gxoker စနစ်သစ်မေးခွန်းအတန်း</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Pyidaungsu:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #0056b3; --accent: #00e5ff; --success: #28a745; --danger: #dc3545; --glow-1: #00f2fe; --glow-2: #4facfe; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; font-family: 'Montserrat', 'Pyidaungsu', sans-serif; }
+        body { background: #f0f2f5; margin: 0; height: 100dvh; display: flex; flex-direction: column; overflow: hidden; }
+
+        /* 🚂 Marquee Effect - Fixed Below Header */
+        .train-container { background: #ffeb3b; color: #000; height: 30px; display: flex; align-items: center; border-bottom: 2px solid #000; overflow: hidden; position: relative; z-index: 100; }
+        .train-text { position: absolute; white-space: nowrap; animation: trainRun 12s linear infinite; font-weight: bold; font-size: 14px; }
+        @keyframes trainRun { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+
+        /* 🔑 Login Screen */
+        #login-screen { position: fixed; inset: 0; background: #e9ecef; z-index: 5000; display: flex; align-items: center; justify-content: center; padding: 10px; }
+        .login-card { background: #fff; width: 100%; max-width: 600px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); overflow: hidden; }
+        .login-header { background: var(--primary); color: white; padding: 15px; font-weight: bold; text-align: center; }
+        .login-split { display: flex; flex-direction: row; flex-wrap: wrap; }
+        .login-left { flex: 1.2; padding: 20px; }
+        .login-right { flex: 0.8; padding: 20px; background: #f8f9fa; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .profile-img { width: 130px; height: 150px; border-radius: 8px; border: 3px solid #ddd; object-fit: cover; }
+        .u-input { width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 6px; margin-top: 5px; margin-bottom: 10px; }
+        .btn-start { background: var(--success); color: white; border: none; padding: 18px; cursor: pointer; font-weight: bold; font-size: 16px; width: 100%; }
+
+        /* 🏛 Exam Screen */
+        #exam-screen { display: none; flex-direction: column; height: 100dvh; background: #fff; }
+        .ubt-header { display: flex; background: #343a40; color: #fff; height: 45px; flex-shrink: 0; }
+        .h-box { flex: 1; border-right: 1px solid #555; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 11px; }
+
+        .main-view { display: flex; flex: 1; overflow: hidden; padding: 10px; gap: 10px; }
+
+        /* ✨ Glow Effect */
+        .glow-wrap { position: relative; flex: 1; display: flex; flex-direction: column; border-radius: 15px; padding: 3px; background: #eee; overflow: hidden; }
+        .glow-wrap::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: conic-gradient(from 0deg, transparent, var(--glow-1), var(--glow-2), transparent 60%); animation: rotateGlow 3s linear infinite; }
+        @keyframes rotateGlow { 100% { transform: rotate(360deg); } }
+        
+        .q-pane { position: relative; z-index: 1; flex: 1; padding: 20px; overflow-y: auto; border-radius: 12px; background: linear-gradient(rgba(255,255,255,0.92), rgba(255,255,255,0.92)), url('https://i.imgur.com/NFPqTgl.jpeg'); background-size: cover; }
+        .a-pane { position: relative; z-index: 1; flex: 1; padding: 15px; overflow-y: auto; background: #fff; border-radius: 12px; display: flex; flex-direction: column; gap: 10px; }
+
+        .q-img { max-width: 100%; border-radius: 5px; border: 1px solid #ccc; margin: 10px 0; max-height: 200px; object-fit: contain; }
+        .q-text { font-size: 18px; line-height: 1.6; color: #000; font-weight: bold; }
+        
+        .ans-item { display: flex; align-items: center; padding: 12px; border: 2px solid #eee; border-radius: 10px; cursor: pointer; transition: 0.2s; }
+        .ans-item.selected { background: var(--primary); border-color: var(--accent); color: #fff; }
+        .ans-num { width: 26px; height: 26px; border: 2px solid #333; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 12px; font-weight: bold; flex-shrink: 0; }
+        .ans-item.selected .ans-num { border-color: #fff; background: var(--accent); color: #000; }
+
+        .ubt-footer { display: flex; height: 50px; background: #222; flex-shrink: 0; }
+        .f-btn { flex: 1; color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; font-weight: bold; border-right: 1px solid #444; font-size: 13px; }
+
+        /* 📊 Result & Review */
+        #result-screen { position: fixed; inset: 0; background: #fff; z-index: 7000; display: none; flex-direction: column; align-items: center; justify-content: center; padding: 20px; overflow-y: auto; }
+        .score-card { background: #fff; padding: 30px; border-radius: 20px; width: 100%; max-width: 450px; text-align: center; box-shadow: 0 10px 40px rgba(0,0,0,0.1); }
+        .review-box { margin-top: 20px; text-align: left; max-height: 300px; overflow-y: auto; border: 1px solid #eee; padding: 10px; border-radius: 10px; }
+        .review-item { padding: 8px; border-bottom: 1px solid #eee; font-size: 13px; }
+        .correct { color: var(--success); font-weight: bold; }
+        .wrong { color: var(--danger); font-weight: bold; }
+
+        @media (max-width: 768px) {
+            .main-view { flex-direction: column; }
+            .glow-wrap { flex: 0.5; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="login-screen">
+        <div class="login-card">
+            <div class="login-header">Created By Gxoker စနစ်သစ်မေးခွန်းအတန်း</div>
+            <div class="login-split">
+                <div class="login-left">
+                    <label>NAME</label><input type="text" id="c-name" class="u-input" placeholder="Enter Name">
+                    <label>PASSPORT</label><input type="text" id="c-pass" class="u-input" placeholder="M-000000">
+                    <label>SECTOR</label>
+                    <select id="c-job" class="u-input">
+                        <option>Manufacturing (제조업)</option>
+                        <option>Agriculture (농축산업)</option>
+                        <option>Construction (건설업)</option>
+                    </select>
+                </div>
+                <div class="login-right">
+                    <img src="https://i.imgur.com/edHMTVH.jpeg" class="profile-img">
+                    <p style="font-size: 10px; color: #666; font-weight: bold; margin-top: 10px;">CANDIDATE PROFILE</p>
+                </div>
+            </div>
+            <button id="start-btn" class="btn-start">အမှတ်အပြည့်နဲ့ဖြုတ်ဖို့ စဖြေမယ်</button>
+        </div>
+    </div>
+
+    <div id="exam-screen">
+        <div class="ubt-header">
+            <div class="h-box" id="d-name">NAME</div>
+            <div class="h-box" id="d-job">SECTOR</div>
+            <div class="h-box">REM: <span id="rem-count">20</span></div>
+            <div class="h-box" id="timer-val" style="color:var(--accent);">20:00</div>
+        </div>
+        
+        <div class="train-container">
+            <div class="train-text">Created By Gxoker စနစ်သစ် UBT မေးခွန်းအတန်း ——— စာမေးပွဲတွင် အောင်မြင်ကြပါစေ ——— Created By Gxoker စနစ်သစ် UBT မေးခွန်းအတန်း</div>
+        </div>
+
+        <div class="main-view">
+            <div class="glow-wrap">
+                <div class="q-pane" id="q-pane-scroll">
+                    <div id="q-label" style="color:var(--primary); font-size:12px; font-weight:bold; margin-bottom:10px;">QUESTION 1</div>
+                    <div id="q-content"></div>
+                </div>
+            </div>
+            <div class="glow-wrap">
+                <div class="a-pane" id="ans-list"></div>
+            </div>
+        </div>
+        <div class="ubt-footer">
+            <div class="f-btn" onclick="step(-1)">PREV</div>
+            <div class="f-btn" onclick="openGrid()" style="color:var(--accent);">LIST</div>
+            <div class="f-btn" onclick="step(1)">NEXT</div>
+            <div class="f-btn" id="sub-btn" style="background:var(--success);">SUBMIT</div>
+        </div>
+    </div>
+
+    <div id="result-screen">
+        <div class="score-card">
+            <h2 style="color:var(--primary); margin:0;">Created By Gxoker စနစ်သစ်မေးခွန်းအတန်း</h2>
+            <div style="font-size: 50px; font-weight: bold; color: var(--success); margin: 10px 0;" id="res-score">0</div>
+            <div id="res-fb" style="font-weight: bold; margin-bottom: 15px; color: #555;"></div>
+            <div id="r-stats" style="margin-bottom: 15px;"></div>
+            
+            <div class="review-box" id="review-content"></div>
+            
+            <button class="btn-start" style="margin-top:20px; border-radius:8px;" onclick="location.reload()">RESTART</button>
+        </div>
+    </div>
+
+    <div id="q-list-popup" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.8); z-index:6000; align-items:center; justify-content:center;">
+        <div style="background:#fff; width:90%; max-width:350px; padding:20px; border-radius:15px;">
+            <div class="grid-container" id="grid-box" style="display:grid; grid-template-columns:repeat(5, 1fr); gap:8px;"></div>
+            <button style="width:100%; margin-top:15px; padding:12px; background:#333; color:#fff; border:none; border-radius:8px;" onclick="document.getElementById('q-list-popup').style.display='none'">CLOSE</button>
+        </div>
+    </div>
+
+<script>
+    const questions = [
+        { q: "[1~2] 다음 그림을 보고 맞는 단어나 문장을 고르십시오.", img: "https://i.imgur.com/IU52zfv.jpeg", a: ["은행에서 통장을 만들고 있습니다.", "편의점에서 택배를 보내고 있습니다.", "무인 기기에서 주민등록등본을 발급받고 있습니다.", "우체국에서 편지를 분류하고 있습니다."], c: 2 },
+        { q: "[1~2] 다음 그림을 보고 맞는 단어나 문장을 고르십시오.", img: "https://i.imgur.com/pMKXpfS.jpeg", a: ["이웃 사람과 즐겁게 식사를 합니다.", "층간 소음 때문에 이웃 간에 갈등이 생겼습니다.", "고장 난 세탁기를 수리하고 있습니다.", "이사 온 이웃에게 떡을 돌리고 있습니다."], c: 1 },
+        { q: "[3~4] 다음 표지판의 의미로 맞는 것을 고르십시오.", img: "https://i.imgur.com/AROeO4d.jpeg", a: ["기름이 묻어 있으니 닦으십시오.", "물을 많이 사용하는 곳입니다.", "불꽃이 튀거나 라이터를 사용하면 절대 안 됩니다.", "공기가 탁하니 환기를 시키십시오."], c: 2 },
+        { q: "[3~4] 다음 표지판의 의미로 맞는 것을 고르십시오.", img: "https://i.imgur.com/Ngd9QSn.jpeg", a: ["강아지와 함께 들어갈 수 없습니다.", "길에서 유기견을 발견하면 신고하십시오.", "산책 시 목줄을 채우고 배설물을 직접 치워야 합니다.", "강아지에게 음식을 주지 마십시오."], c: 2 },
+        { q: "[5~6] 빈칸에 들어갈 가장 알맞은 것을 고르십시오.<br><br>5. 한국은 분리수거가 매우 까다롭습니다. 음식물 쓰레기와 일반 쓰레기를 ( _____ ) 버리면 과태료를 낼 수 있으니 주의해야 합니다.", a: ["부드럽게", "나란히", "섞어서", "깨끗이"], c: 2 },
+        { q: "6. 이번 달은 월세뿐만 아니라 공과금도 많이 나와서 경제적으로 ( _____ ) 상황입니다.", a: ["넉넉한", "부담스러운", "한가한", "명랑한"], c: 1 },
+        { q: "[7] 다음 단어와 관계있는 것은 무엇입니까?<br><br><b>[ 범칙금, 벌금, 과태료, 공소시효 ]</b>", a: ["교통 수단", "법적 처벌", "경제 용어", "취미 활동"], c: 1 },
+        { q: "[8] 다음 단어의 비슷한 말은 무엇입니까?<br><br><b>[ 예상하다 ]</b>", a: ["증명하다", "예측하다", "실천하다", "포기하다"], c: 1 },
+        { q: "[9] 다음 안내판의 설명으로 맞는 것은 무엇입니까?", img: "https://i.imgur.com/1a43WrC.jpeg", a: ["미세먼지가 없으니 야외 활동을 권장합니다.", "미세먼지 농도가 높으니 대중교통 이용을 당부합니다.", "차량 2부제를 실시하지 않습니다.", "마스크를 쓰지 않아도 괜찮습니다."], c: 1 },
+        { q: "[10] 다음 그래프를 보고 맞는 것을 고르십시오.", img: "https://i.imgur.com/Puu1nRy.jpeg", a: ["나이가 많을수록 스마트폰을 더 많이 사용합니다.", "20대보다 30대의 의존도가 더 높습니다.", "10대 청소년들의 스마트폰 의존도가 가장 높게 나타났습니다.", "모든 연령층에서 스마트폰 사용량이 똑같습니다."], c: 2 },
+        { q: "11. 최근 한국에서는 1인 가구가 급증하면서 혼자 밥을 먹는 '혼밥' 문화가 ( _____ ) 자리 잡았습니다.", a: ["간신히", "자연스럽게", "억지로", "갑자기"], c: 1 },
+        { q: "12. 길을 가다가 주인 없는 지갑을 주웠을 때 본인이 가지면 법적 ( _____ )을/를 받을 수 있으므로 반드시 경찰서에 가져다주어야 합니다.", a: ["칭찬", "처벌", "기부", "보상"], c: 1 },
+        { q: "13. 한국의 여름은 고온다습하기 때문에 음식이 쉽게 ( _____ ) 수 있습니다. 남은 음식은 반드시 냉장 보관해야 합니다.", a: ["얼 수", "익을 수", "상할 수", "달아질 수"], c: 2 },
+        { q: "14. 고속도로를 달릴 때는 전 좌석 안전벨트를 ( _____ ) 하는 것이 의무입니다. 이를 어길 시 운전자에게 범칙금이 부과됩니다.", a: ["풀도록", "착용하도록", "사도록", "빌리도록"], c: 1 },
+        { q: "15. 한국의 겨울은 매우 춥고 건조합니다. 실내 온도를 높이면 공기가 더 건조해져서 호흡기 질환에 걸리기 쉽습니다. 따라서 가습기를 사용하거나 젖은 수건을 걸어 두어 적정 습도를 유지하는 것이 좋습니다.", a: ["겨울철 운동 방법", "겨울철 실내 습도 관리의 중요성", "감기약의 종류", "스키장 이용 안내"], c: 1 },
+        { q: "16. 현대인들은 바쁜 일상 속에서 스트레스를 많이 받습니다. 이를 방치하면 마음의 병이 생길 수 있으므로 명상을 하거나 취미 활동을 통해 스트레스를 제때 해소하는 노력이 필요합니다.", a: ["직업의 종류", "현대인의 스트레스 관리", "여행지 추천", "요가 학원 홍보"], c: 1 },
+        { q: "17. 저출산과 고령화 현상이 심화되면서 한국 사회의 인구 구조가 빠르게 변하고 있습니다. 노인 인구는 늘어나는 반면 일할 수 있는 젊은 층은 줄어들고 있어 다양한 대책이 마련되고 있습니다.", a: ["한국의 인구 변화 문제", "육ာ 휴직 제도", "연금 보험 가입 방법", "신입 사원 채용 공고"], c: 0 },
+        { q: "18. 한국에서 물건을 살 때 현금 대신 카드를 사용하면 편리합니다. 또한 연말정산 시 세금 감면 혜택을 받을 수 있어 경제적입니다. 하지만 재래시장 등 일부 장소에서는 소액 결제 시 현금을 선호하기도 하므로 약간의 현금을 가지고 다니는 것이 좋습니다.", a: ["시장에서는 무조건 카드만 사용해야 합니다.", "카드를 사용하면 세금을 더 많이 내야 합니다.", "카드 결제는 편리하며 세금 혜택도 받을 수 있습니다.", "현금은 한국에서 전혀 필요하지 않습니다."], c: 2 },
+        { q: "19. 보이스피싱은 전화를 통해 개인정보를 알아내거나 돈을 갈취하는 범죄입니다. 공공기관은 절대로 전화를 통해 통장 비밀번호나 송금을 요구하지 않습니다. 이런 전화를 받으면 즉시 끊고 경찰청(112)에 신고해야 합니다.", a: ["은행 직원은 전화로 비밀번호를 물어봅니다.", "모르는 번호로 송금을 요구하는 전화는 사기일 가능성이 높습니다.", "보이스피싱을 당하면 집주인에게 전화해야 합니다.", "범죄자가 시키는 대로 돈을 보내야 안전합니다."], c: 1 },
+        { q: "20. 자전거를 탈 때는 반드시 헬멧을 착용해야 하며 야간에는 조명등을 켜야 합니다. 자전거도 도로교통법상 '차'에 해당하기 때문에 음주 후 자전거를 타는 것도 단속 대상이 되며 벌금이 부과될 수 있습니다.", a: ["자전거는 음주 후에 타도 괜찮습니다.", "밤에는 조명을 끄고 타는 것이 예의입니다.", "자전거 음주 운전도 법적으로 처벌을 받습니다.", "헬멧은 사고가 났을 때만 쓰면 됩니다."], c: 2 }
+    ];
+
+    let idx = 0, userAns = Array(20).fill(null), clock = 1200, timerId;
+
+    document.getElementById('start-btn').onclick = () => {
+        const name = document.getElementById('c-name').value;
+        if(!name) return alert("Please enter your name!");
+        document.getElementById('login-screen').style.display = 'none';
+        document.getElementById('exam-screen').style.display = 'flex';
+        document.getElementById('d-name').innerText = name;
+        document.getElementById('d-job').innerText = document.getElementById('c-job').value;
+        render();
+        timerId = setInterval(() => {
+            clock--;
+            let m = Math.floor(clock/60), s = clock%60;
+            document.getElementById('timer-val').innerText = `${m}:${s<10?'0':''}${s}`;
+            if(clock <= 0) finish();
+        }, 1000);
+    };
+
+    function render() {
+        document.getElementById('q-pane-scroll').scrollTo(0,0);
+        const qData = questions[idx];
+        document.getElementById('q-label').innerText = `QUESTION ${idx + 1} / 20`;
+        let html = `<div class="q-text">${qData.q}</div>`;
+        if(qData.img) html += `<img src="${qData.img}" class="q-img">`;
+        document.getElementById('q-content').innerHTML = html;
+
+        document.getElementById('ans-list').innerHTML = qData.a.map((opt, i) => `
+            <div class="ans-item ${userAns[idx] === i ? 'selected' : ''}" onclick="pick(${i})">
+                <div class="ans-num">${i+1}</div><div class="ans-text">${opt}</div>
+            </div>`).join('');
+        document.getElementById('rem-count').innerText = 20 - userAns.filter(a => a !== null).length;
+    }
+
+    window.pick = (i) => { userAns[idx] = i; render(); };
+    window.step = (d) => { if(idx+d >= 0 && idx+d < 20) { idx += d; render(); } };
+    window.openGrid = () => {
+        document.getElementById('q-list-popup').style.display = 'flex';
+        document.getElementById('grid-box').innerHTML = Array.from({length: 20}, (_, i) => `
+            <div class="grid-item ${userAns[i] !== null ? 'done' : ''}" onclick="idx=${i};render();document.getElementById('q-list-popup').style.display='none'">${i+1}</div>`).join('');
+    };
+
+    document.getElementById('sub-btn').onclick = () => { if(confirm("Submit Exam?")) finish(); };
+
+    function finish() {
+        clearInterval(timerId);
+        let correctCount = userAns.filter((ans, i) => ans === questions[i].c).length;
+        let finalScore = correctCount * 5;
+        
+        document.getElementById('res-score').innerText = finalScore;
+        document.getElementById('r-stats').innerText = `Total Correct: ${correctCount} / 20`;
+        
+        // Feedback Logic
+        let fb = "";
+        if(finalScore >= 100) fb = "🏆 လုံးဝအမိုက်စားပဲဗျို့ အမှတ်မကျအောင်ထိန်းထားနော်။";
+        else if(finalScore >= 95) fb = "🔥 ဒီတစ်ခါ ကပ်သီးလေးလွဲပေမယ့် နောက်တစ်ခါအပြည့်ဖြုတ်ကျမယ်။";
+        else if(finalScore >= 90) fb = "📖 Good Job နောက်တစ်ခါအပြည့်ယူမယ်";
+        else fb = "❌ အမှတ်နည်းနေပါတယ်။ အခြေခံကစပြီး ပြန်လေ့လာပါ။";
+        document.getElementById('res-fb').innerText = fb;
+
+        // Review Mode Logic
+        let reviewHtml = questions.map((q, i) => {
+            let status = (userAns[i] === q.c) ? `<span class="correct">CORRECT</span>` : `<span class="wrong">WRONG (Ans: ${q.c + 1})</span>`;
+            return `<div class="review-item">Q${i+1}: ${status}</div>`;
+        }).join('');
+        document.getElementById('review-content').innerHTML = reviewHtml;
+
+        document.getElementById('exam-screen').style.display = 'none';
+        document.getElementById('result-screen').style.display = 'flex';
+    }
+</script>
+</body>
+</html>
+
